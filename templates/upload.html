@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0"><i class="fas fa-upload"></i> Upload Fruit Image</h4>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Tips for best results:</strong>
+                    <ul class="mb-0 mt-2">
+                        <li>Use good lighting</li>
+                        <li>Take a clear, focused photo</li>
+                        <li>Capture the fruit against a plain background</li>
+                        <li>Make sure the fruit is clearly visible</li>
+                    </ul>
+                </div>
+
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="file" class="form-label">Select Fruit Image</label>
+                        <input class="form-control" type="file" id="file" name="file" accept="image/*" required>
+                        <div class="form-text">Supported formats: JPG, PNG, JPEG, GIF</div>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">
+                        <i class="fas fa-search"></i> Check Freshness
+                    </button>
+                </form>
+
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card border-success">
+                            <div class="card-body text-center">
+                                <i class="fas fa-check-circle text-success fa-2x"></i>
+                                <h6 class="mt-2">Fresh Fruit</h6>
+                                <small class="text-muted">Bright color, firm texture, no blemishes</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card border-danger">
+                            <div class="card-body text-center">
+                                <i class="fas fa-times-circle text-danger fa-2x"></i>
+                                <h6 class="mt-2">Rotten Fruit</h6>
+                                <small class="text-muted">Dark spots, mold, soft texture</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0"><i class="fas fa-history"></i> Prediction History</h4>
+            </div>
+            <div class="card-body">
+                {% if predictions %}
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Prediction</th>
+                                <th>Confidence</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for prediction in predictions %}
+                            <tr>
+                                <td>
+                                    <img src="{{ url_for('static', filename='uploads/' + prediction[0]) }}" 
+                                         class="img-thumbnail" style="width: 80px; height: 80px;" 
+                                         alt="Fruit image">
+                                </td>
+                                <td>
+                                    <span class="badge {% if 'fresh' in prediction[1] %}bg-success{% else %}bg-danger{% endif %}">
+                                        {{ prediction[1].replace('_', ' ').title() }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="progress" style="height: 20px; width: 100px;">
+                                        <div class="progress-bar {% if prediction[2] > 70 %}bg-success{% elif prediction[2] > 50 %}bg-warning{% else %}bg-danger{% endif %}" 
+                                             style="width: {{ prediction[2]  }}%">
+                                            {{ "%.1f"|format(prediction[2] ) }}%
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{ prediction[3] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="text-center py-4">
+                    <i class="fas fa-history fa-3x text-muted mb-3"></i>
+                    <h5>No predictions yet</h5>
+                    <p class="text-muted">Upload your first fruit image to see results here.</p>
+                    <a href="{{ url_for('upload') }}" class="btn btn-success">Check Fruit Freshness</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

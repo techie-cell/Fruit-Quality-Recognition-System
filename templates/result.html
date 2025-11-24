@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0"><i class="fas fa-chart-bar"></i> Analysis Results</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <img src="{{ url_for('static', filename='uploads/' + filename) }}" 
+                             class="img-fluid rounded shadow" alt="Uploaded fruit image"
+                             style="max-height: 300px;">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-4">
+                            <h5>Prediction Result:</h5>
+                            {% if 'fresh' in prediction %}
+                            <div class="alert alert-success">
+                                <i class="fas fa-check-circle"></i>
+                                <strong>Fresh Fruit</strong>
+                            </div>
+                            {% else %}
+                            <div class="alert alert-danger">
+                                <i class="fas fa-times-circle"></i>
+                                <strong>Rotten Fruit</strong>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-4">
+                            <h5>Confidence Level:</h5>
+                            <div class="progress" style="height: 25px;">
+                                <div class="progress-bar {% if confidence > 70 %}bg-success{% elif confidence > 50 %}bg-warning{% else %}bg-danger{% endif %}" 
+                                     role="progressbar" 
+                                     style="width: {{ confidence }}%">
+                                    {{ "%.2f"|format(confidence ) }}%
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <h5>Detailed Analysis:</h5>
+                            <p class="text-muted">Fruit Type: <strong>{{ prediction.split('_')[1].title() }}</strong></p>
+                            <p class="text-muted">Freshness: <strong>{{ prediction.split('_')[0].title() }}</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <h5><i class="fas fa-lightbulb"></i> Suggestion:</h5>
+                    <div class="alert {% if 'fresh' in prediction %}alert-success{% else %}alert-danger{% endif %}">
+                        {{ suggestion }}
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="{{ url_for('upload') }}" class="btn btn-success me-2">
+                        <i class="fas fa-upload"></i> Check Another Fruit
+                    </a>
+                    <a href="{{ url_for('results') }}" class="btn btn-outline-success">
+                        <i class="fas fa-history"></i> View History
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

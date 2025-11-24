@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row align-items-center min-vh-75">
+    <div class="col-md-6">
+        <h1 class="display-4 text-success mb-4">
+            <i class="fas fa-apple-alt"></i> Welcome to FruitFresh Check
+        </h1>
+        <p class="lead mb-4">
+            Upload images of fruits to check their freshness using our AI-powered classification system. 
+            Get instant results and helpful suggestions for your fruits.
+        </p>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="card h-100 border-success">
+                    <div class="card-body text-center">
+                        <i class="fas fa-camera fa-3x text-success mb-3"></i>
+                        <h5>Upload Image</h5>
+                        <p class="text-muted">Take or upload a clear photo of your fruit</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card h-100 border-success">
+                    <div class="card-body text-center">
+                        <i class="fas fa-brain fa-3x text-success mb-3"></i>
+                        <h5>AI Analysis</h5>
+                        <p class="text-muted">Our model analyzes fruit freshness</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card h-100 border-success">
+                    <div class="card-body text-center">
+                        <i class="fas fa-chart-bar fa-3x text-success mb-3"></i>
+                        <h5>Get Results</h5>
+                        <p class="text-muted">Instant freshness results with confidence scores</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card h-100 border-success">
+                    <div class="card-body text-center">
+                        <i class="fas fa-lightbulb fa-3x text-success mb-3"></i>
+                        <h5>Smart Suggestions</h5>
+                        <p class="text-muted">Receive helpful recommendations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if not session.user_id %}
+        <div class="mt-4">
+            <a href="{{ url_for('register') }}" class="btn btn-success btn-lg me-2">
+                <i class="fas fa-user-plus"></i> Get Started
+            </a>
+            <a href="{{ url_for('login') }}" class="btn btn-outline-success btn-lg">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+        </div>
+        {% else %}
+        <div class="mt-4">
+            <a href="{{ url_for('upload') }}" class="btn btn-success btn-lg">
+                <i class="fas fa-upload"></i> Check Fruit Freshness
+            </a>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-6 text-center">
+        <img src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+             alt="Fresh Fruits" class="img-fluid rounded shadow">
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-12">
+        <h2 class="text-center mb-4">Supported Fruits</h2>
+        <div class="row text-center">
+            <div class="col-md-3 col-6 mb-3">
+                <i class="fas fa-apple-alt fa-3x text-danger"></i>
+                <h5 class="mt-2">Apples</h5>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <i class="fas fa-lemon fa-3x text-warning"></i>
+                <h5 class="mt-2">Oranges</h5>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <i class="fas fa-lemon fa-3x text-warning"></i>
+                <h5 class="mt-2">Bananas</h5>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <i class="fas fa-apple-alt fa-3x text-danger"></i>
+                <h5 class="mt-2">Tomatoes</h5>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
