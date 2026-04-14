@@ -1,4 +1,5 @@
-#Fruit Fresh Check – AI-Based Fruit Quality Assessment System
+## Fruit Fresh Check – AI-Based Fruit Quality Assessment System
+
 Deep learning based Fruit Quality Recognition system using VGG16 and Flask. Identifies fruit type and classifies quality (fresh/rotten) from images. Includes web app, prediction module, and sample test images.
 This system can be used in agriculture, food industries, and retail environments to automate fruit inspection and improve quality control.
 
